@@ -51,7 +51,7 @@
 		<repository>
 			<id>SNAPSHOT</id>
 			<name>testrepo</name>
-			<url>http://172.31.31.80:8081/artifactory/threeriinfotech/</url>
+			<url>http://ec2-54-175-90-126.compute-1.amazonaws.com:8081/artifactory/testing_generic//</url>
 		</repository>
 			</distributionManagement>
 
