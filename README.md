@@ -1,18 +1,59 @@
-# Dead simple, boiler plate getting started Java app with maven
-Skeleton Java project with a vanilla maven file with minimal options to get you started.
+# A simple, minimal Maven example: hello world
 
-#### Notes ####
-This project contains a gitignore that will stop most IDE specific files as well as Java build files from being checked into source control. It's generally good practice to only contain core files that are needed for the project to run. Since Maven, Gradle, or Ant (not really anymore) control the build process and project attributes we don't need to hold on to project specific files from IDEA, NetBeans, Eclipse, etc.
+To create the files in this git repo we've already run `mvn archetype:generate` from http://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
 
-#### Getting started example with IDEA ####
+    mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
-##### Build project to a *.jar #####
-* Git clone this project to your local workstation.
-* Open IntelliJ IDEA and select the option to import an project
-* After going through the import process we will open the File menu and select Project Structure.
-* Select the Artifacts tab
-* Click the plus (+) sign and add JAR -> Empty.
-* Make sure your output directory at the top is desireable. I usually select bin/ to put the jar
-* Select "Build on Make" checkbox
-* Make sure the manifest is selected
-* Right-click your *.jar inside output layout. Select Add a Copy of -> Module Output
+Now, to print "Hello World!", type either...
+
+    cd my-app
+    mvn compile
+    java -cp target/classes com.mycompany.app.App
+
+or...
+
+    cd my-app
+    mvn package
+    java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+
+Running `mvn clean` will get us back to only the source Java and the `pom.xml`:
+
+    murphy:my-app pdurbin$ mvn clean --quiet
+    murphy:my-app pdurbin$ ack -a -f
+    pom.xml
+    src/main/java/com/mycompany/app/App.java
+    src/test/java/com/mycompany/app/AppTest.java
+
+Running `mvn compile` produces a class file:
+
+    murphy:my-app pdurbin$ mvn compile --quiet
+    murphy:my-app pdurbin$ ack -a -f
+    pom.xml
+    src/main/java/com/mycompany/app/App.java
+    src/test/java/com/mycompany/app/AppTest.java
+    target/classes/com/mycompany/app/App.class
+    murphy:my-app pdurbin$ 
+    murphy:my-app pdurbin$ java -cp target/classes com.mycompany.app.App
+    Hello World!
+
+Running `mvn package` does a compile and creates the target directory, including a jar:
+
+    murphy:my-app pdurbin$ mvn clean --quiet
+    murphy:my-app pdurbin$ mvn package > /dev/null
+    murphy:my-app pdurbin$ ack -a -f
+    pom.xml
+    src/main/java/com/mycompany/app/App.java
+    src/test/java/com/mycompany/app/AppTest.java
+    target/classes/com/mycompany/app/App.class
+    target/maven-archiver/pom.properties
+    target/my-app-1.0-SNAPSHOT.jar
+    target/surefire-reports/com.mycompany.app.AppTest.txt
+    target/surefire-reports/TEST-com.mycompany.app.AppTest.xml
+    target/test-classes/com/mycompany/app/AppTest.class
+    murphy:my-app pdurbin$ 
+    murphy:my-app pdurbin$ java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
+    Hello World!
+
+Running `mvn clean compile exec:java` requires http://mojo.codehaus.org/exec-maven-plugin/
+
+Running `java -jar target/my-app-1.0-SNAPSHOT.jar` requires http://maven.apache.org/plugins/maven-shade-plugin/
