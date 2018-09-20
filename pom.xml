@@ -106,5 +106,16 @@
           </configuration>
       </plugin>
     </plugins>
+	  <profiles>
+    <profile>
+        <id>test</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <properties>
+            <deployment.repository.url>http://18.212.42.122:8081/artifactory/testing_generic/
+            </deployment.repository.url>
+        </properties>
+    </profile>
   </build>
 </project>
