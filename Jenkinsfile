@@ -1,9 +1,10 @@
 pipeline {
     agent any
     stages{
-		stage('Clone sources') {
+		stage{('Clone sources') {
+			steps{
 			git url: 'https://github.com/jeettest2/testprojectUSER.git'
-								}
+							}	}
 
 		stage('Artifactory configuration') {
         // Tool name from Jenkins configuration
