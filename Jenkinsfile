@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    stages{
     stage('Clone sources') {
         git url: 'https://github.com/jeettest2/testprojectUSER.git'
     }
@@ -21,4 +21,4 @@ pipeline {
         server.publishBuildInfo buildInfo
     }
 }
-
+}
