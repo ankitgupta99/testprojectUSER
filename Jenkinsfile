@@ -18,6 +18,7 @@ node {
 	        },
 	        'integration': {
 	            sh "echo 'shell scripts to run integration tests...'"
+			mail bcc: '', body: 'DEV Ready to Go ?', cc: '', from: '', replyTo: '', subject: 'Jenkins Job approval ', to: 'ankg@outlook.com'
 	        }
         }
       	stage ('Deploy') {
